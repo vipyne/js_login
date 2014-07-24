@@ -1,0 +1,130 @@
+@font-face
+{
+  font-family: Futura;
+  src: url('img/FuturaLT-Book.woff');
+}
+
+body,
+html,
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Futura, arial;
+  font-variant: small-caps;
+}
+
+body {
+  background-color: rgb(247, 243, 231)
+}
+
+form {
+  padding: 0;
+  margin: 0 auto;
+  width: 70%;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  letter-spacing: 8px;
+  line-height: 25px;
+}
+
+h4 {
+  text-align: center;
+  font-size: 18px;
+}
+
+p {
+  text-align: center;
+  color: rgb(232, 93, 109)
+}
+
+span {
+  font-size: 13px;
+}
+
+img {
+  width: 70px;
+  padding: 10px 10px 0;
+  float: left;
+}
+
+#content {
+  display: block;
+  background-color: rgb(93, 232, 216);
+  border-radius: 10px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 180px;
+  color: rgb(105, 105, 105);
+  }
+
+.center-horizontal {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+input {
+  width: 78%;
+  border: none;
+  color: rgb(0,0,0);
+  padding-left: 3px;
+}
+
+input[type="submit"] {
+  width: 50px;
+  color: rgb(105, 105, 105);
+  background-color: rgb(170, 170, 170);
+}
+
+input[type="submit"]:hover {
+  color: rgb(170, 170, 170);
+  background-color: rgb(105, 105, 105);
+}
+
+.format label {
+  display: inline-block;
+  width: 62px;
+  text-align: right;
+  font-size: 13px;
+}
+
+.email:hover:after {
+  content: "must be a valid email address";
+  position: absolute;
+  text-align: left;
+  color: rgb(93, 232, 216);
+  font-size: 13px;
+  background-color: rgb(105, 105, 105);
+  margin: 0 5px;
+  padding: 0 4px;
+}
+
+.password:hover:after {
+  content: "must include one number,\A one uppercase character,\A and one lowercase character";
+  white-space: pre;
+  text-align: left;
+  position: absolute;
+  color: rgb(93, 232, 216);
+  font-size: 13px;
+  background-color: rgb(105, 105, 105);
+  margin: 0 5px;
+  padding: 0 4px;
+}
+
+.title {
+  margin: 0 auto;
+  height: 80px;
+}
+
+@media screen and (max-width: 555px){
+  input {
+    width: 60%;
+  }
+}
