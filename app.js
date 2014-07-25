@@ -75,7 +75,7 @@ var validate = (function(){
   }
 
   var emailInput = function(email){
-    var pattern = /^(?!\.)[\w\W]+@[\w\W]+\.[\w\W]{3}$/g // TODO - address if'.' is before '@'
+    var pattern = /^(?!\.)[\w\W]+@[\w\W]+\.[\w\W]{3}$/g // TODO - address if '.' is before '@'
     pattern.lastIndex = 0 // tests string from beginning again if user retry login
     return pattern.test(email)
   }
@@ -93,14 +93,20 @@ var validate = (function(){
   }
 
   var message = function(input){
+    var err
     var errors = {  // change to object literal?
       'email': 'sorry, that email is not valid',
       'no number': 'please include at least one number in your password',
       'no uppercase': 'please include at least one uppercase character in your password',
       'no lowercase': 'please include at least one lowercase character in your password',
-
-      default: 'opps, something went wrong! please reload page and try again'
+      'default': 'opps, something went wrong! please reload page and try again'
     }
+    if(errors[input]){
+      err = errors[input]
+    }else{
+      err = errors['default']
+    }
+    return err
   }
 
   var formInput = function(event){
