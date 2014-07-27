@@ -8,11 +8,11 @@
 // all the IEs are snowflakes
 // handles events cross browsers
 
-var addEvent = function(theEvent, element, function){
+var addEvent = function(theEvent, element, func){
   if(element.addEventListener){
-    element.addEventListener(theEvent, function, false)
+    element.addEventListener(theEvent, func, false)
   }else if(element.attachEvent){
-    element.attachEvent('on' + theEvent, function)
+    element.attachEvent('on' + theEvent, func)
   }
 }
 
@@ -45,14 +45,14 @@ var placeholder = (function(){
 
   var removeEmail = function(){
     var e = document.forms[0].children[0].children[1]
-    e.addEvent('onfocus', function(){
+    addEvent('focus', e, function(){
       e.value = ''
     }, false)
   }
 
   var removePassword = function(){
     var p = document.forms[0].children[1].children[1]
-    p.addEvent('onfocus', function(){
+    addEvent('focus', p, function(){
       p.value = ''
     }, false)
   }
@@ -156,10 +156,14 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
-validate.form.addEvent('submit', function(event){
-  placeholder.IEcompatible()
+addEvent('submit', validate.form, function(event){
+  // debugger
   validate.formInput(event)
-})
+}, false)
+
+if(document.attachEvent){
+  placeholder.IEcompatible()
+}
 
 /////////////////////////////
 })(window, document)
