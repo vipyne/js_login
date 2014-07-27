@@ -1,7 +1,9 @@
 @font-face
 {
   font-family: Futura;
-  src: url('img/FuturaLT-Book.woff');
+  src: url('img/FuturaLT-Book.eot');
+  src: url('img/FuturaLT-Book.eot?#ie8fix') format('embedded-opentype'),
+       url('img/FuturaLT-Book.woff') format('woff');
 }
 
 body,
@@ -14,7 +16,7 @@ html,
 }
 
 body {
-  background-color: rgb(247, 243, 231)
+  background-color: rgb(247, 243, 231);
 }
 
 form {
