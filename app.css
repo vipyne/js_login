@@ -79,6 +79,10 @@ input {
   padding-left: 3px;
 }
 
+:-ms-input-placeholder {
+  color: rgb(170,170,170);
+}
+
 input[type="submit"] {
   width: 50px;
   color: rgb(105, 105, 105);
