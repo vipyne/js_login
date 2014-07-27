@@ -64,12 +64,12 @@ img {
   left: 0;
   height: 180px;
   color: rgb(105, 105, 105);
-  }
-
-.center-horizontal {
   max-width: 500px;
-  margin: 0 auto;
   padding: 10px;
+}
+
+#ie-wrapper {
+  text-align: center;
 }
 
 input {
