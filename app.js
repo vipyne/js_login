@@ -1,5 +1,23 @@
 (function(window, document, undefined){ // trying to stay out of global scope
 
+// browser utility //////////
+/////////////////////////////
+/////////////////////////////
+
+// know i should've done this from beginning...
+// all the IEs are snowflakes
+// handles events cross browsers
+
+var addEvent = function(theEvent, element, function){
+  if(element.addEventListener){
+    element.addEventListener(theEvent, function, false)
+  }else if(element.attachEvent){
+    element.attachEvent('on' + theEvent, function)
+  }
+}
+
+
+
 // placeholder //////////////
 /////////////////////////////
 /////////////////////////////
@@ -27,14 +45,14 @@ var placeholder = (function(){
 
   var removeEmail = function(){
     var e = document.forms[0].children[0].children[1]
-    e.attachEvent('onfocus', function(){
+    e.addEvent('onfocus', function(){
       e.value = ''
     }, false)
   }
 
   var removePassword = function(){
     var p = document.forms[0].children[1].children[1]
-    p.attachEvent('onfocus', function(){
+    p.addEvent('onfocus', function(){
       p.value = ''
     }, false)
   }
@@ -138,18 +156,10 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
-// determine browser compatibility (attachEvent vs addEventListener)
-
-if(validate.form.addEventListener){
-  validate.form.addEventListener('submit', function(event){
-    validate.formInput(event)
-  }, false)
-  }else if(validate.form.attachEvent){
-    placeholder.IEcompatible()
-    validate.form.attachEvent('onsubmit', function(event){
-      validate.formInput(event)
-    }, false)
-}
+validate.form.addEvent('submit', function(event){
+  placeholder.IEcompatible()
+  validate.formInput(event)
+})
 
 /////////////////////////////
 })(window, document)
