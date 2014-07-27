@@ -21,7 +21,7 @@ var placeholder = (function(){
   var grey = function(){
     var placeholders = document.querySelectorAll('.grey')
     for(var i = 0; i < placeholders.length; i++){
-      placeholders[i].style.color = 'rgba(170,170,170,1)'
+      placeholders[i].style.color = 'rgb(170,170,170)' // ie8 doesn't understand alpha
     }
   }
 
