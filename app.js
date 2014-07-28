@@ -7,6 +7,8 @@
 // know i should've done this from beginning...
 // all the IEs are snowflakes
 // handles events cross browsers
+// sidenote: not sure if it's ok to have this
+// in this pseudo global scope
 
 var addEvent = function(theEvent, element, func){
   if(element.addEventListener){
@@ -22,9 +24,12 @@ var addEvent = function(theEvent, element, func){
 /////////////////////////////
 /////////////////////////////
 
-// fallback for HTML5 placeholder for IE8
+// fallback for HTML5 placeholder for IE8 and probably other browsers
 
-var placeholder = (function(){
+// changed variable name and return function name to be more readable
+// when called (on line 172)
+
+var fallback = (function(){
 
   var email = function(){
     var e = document.forms[0].children[0].children[1]
@@ -57,7 +62,7 @@ var placeholder = (function(){
     }, false)
   }
 
-  var IEcompatible = function(){ // public method to call private methods
+  var placeholder = function(){ // public method to call private methods
     email()
     password()
     grey()
@@ -66,7 +71,7 @@ var placeholder = (function(){
   }
 
   return {
-    IEcompatible: IEcompatible
+    placeholder: placeholder
   }
 
 })()
@@ -122,7 +127,7 @@ var validate = (function(){
   }
 
   var error = function(message){
-    if(message == null){
+    if(message === null){
       return false // passed validation
     }else{
       var oldErrorP = document.getElementsByTagName('p')
@@ -137,6 +142,8 @@ var validate = (function(){
     }
   }
 
+  // i like how pretty and short this is, but not sure if its confusing to have
+  // logic where 'null' means 'passed validation'
   var formInput = function(event){
     if(error( message( email() )) || error( message( password() ))){
       event.preventDefault()
@@ -156,14 +163,13 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
+if(document.attachEvent){
+  fallback.placeholder()
+}
+
 addEvent('submit', validate.form, function(event){
-  // debugger
   validate.formInput(event)
 }, false)
-
-if(document.attachEvent){
-  placeholder.IEcompatible()
-}
 
 /////////////////////////////
 })(window, document)
