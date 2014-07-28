@@ -2,7 +2,7 @@
 {
   font-family: Futura;
   src: url('img/FuturaLT-Book.eot');
-  src: url('img/FuturaLT-Book.eot?#ie8fix') format('embedded-opentype'),
+  src: url('img/FuturaLT-Book.eot?#iefix') format('embedded-opentype'),
        url('img/FuturaLT-Book.woff') format('woff');
 }
 
