@@ -17,6 +17,7 @@ html,
 
 body {
   background-color: rgb(247, 243, 231);
+  width: 100%;
 }
 
 form {
