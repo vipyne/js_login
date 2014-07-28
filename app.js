@@ -146,7 +146,11 @@ var validate = (function(){
   // logic where 'null' means 'passed validation'
   var formInput = function(event){
     if(error( message( email() )) || error( message( password() ))){
-      event.preventDefault()
+      if(event.preventDefault){
+        event.preventDefault()
+      }else{
+        event.returnValue = false
+      }
     }
   }
 
