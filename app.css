@@ -1,7 +1,9 @@
 @font-face
 {
   font-family: Futura;
-  src: url('img/FuturaLT-Book.woff');
+  src: url('img/FuturaLT-Book.eot');
+  src: url('img/FuturaLT-Book.eot?#ie8fix') format('embedded-opentype'),
+       url('img/FuturaLT-Book.woff') format('woff');
 }
 
 body,
@@ -14,7 +16,8 @@ html,
 }
 
 body {
-  background-color: rgb(247, 243, 231)
+  background-color: rgb(247, 243, 231);
+  width: 100%;
 }
 
 form {
@@ -62,12 +65,12 @@ img {
   left: 0;
   height: 180px;
   color: rgb(105, 105, 105);
-  }
-
-.center-horizontal {
   max-width: 500px;
-  margin: 0 auto;
   padding: 10px;
+}
+
+#ie-wrapper {
+  text-align: center;
 }
 
 input {
@@ -75,6 +78,10 @@ input {
   border: none;
   color: rgb(0,0,0);
   padding-left: 3px;
+}
+
+:-ms-input-placeholder {
+  color: rgb(170,170,170);
 }
 
 input[type="submit"] {

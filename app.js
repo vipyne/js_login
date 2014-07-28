@@ -1,5 +1,23 @@
 (function(window, document, undefined){ // trying to stay out of global scope
 
+// browser utility //////////
+/////////////////////////////
+/////////////////////////////
+
+// know i should've done this from beginning...
+// all the IEs are snowflakes
+// handles events cross browsers
+
+var addEvent = function(theEvent, element, func){
+  if(element.addEventListener){
+    element.addEventListener(theEvent, func, false)
+  }else if(element.attachEvent){
+    element.attachEvent('on' + theEvent, func)
+  }
+}
+
+
+
 // placeholder //////////////
 /////////////////////////////
 /////////////////////////////
@@ -21,20 +39,20 @@ var placeholder = (function(){
   var grey = function(){
     var placeholders = document.querySelectorAll('.grey')
     for(var i = 0; i < placeholders.length; i++){
-      placeholders[i].style.color = 'rgba(170,170,170,1)'
+      placeholders[i].style.color = 'rgb(170,170,170)' // ie8 doesn't understand alpha
     }
   }
 
   var removeEmail = function(){
     var e = document.forms[0].children[0].children[1]
-    e.attachEvent('onfocus', function(){
+    addEvent('focus', e, function(){
       e.value = ''
     }, false)
   }
 
   var removePassword = function(){
     var p = document.forms[0].children[1].children[1]
-    p.attachEvent('onfocus', function(){
+    addEvent('focus', p, function(){
       p.value = ''
     }, false)
   }
@@ -138,17 +156,13 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
-// determine browser compatibility (attachEvent vs addEventListener)
+addEvent('submit', validate.form, function(event){
+  // debugger
+  validate.formInput(event)
+}, false)
 
-if(validate.form.addEventListener){
-  validate.form.addEventListener('submit', function(event){
-    validate.formInput(event)
-  }, false)
-  }else if(validate.form.attachEvent){
-    placeholder.IEcompatible()
-    validate.form.attachEvent('onsubmit', function(event){
-      validate.formInput(event)
-    }, false)
+if(document.attachEvent){
+  placeholder.IEcompatible()
 }
 
 /////////////////////////////
