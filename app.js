@@ -30,9 +30,10 @@ var fallback = (function(input){
     input.style.color = color
   }
 
-  var set = function(inputs){
+  var set = function(){
     var placeholder
-    for(var i = 0; inputs.length; i++){
+    var inputs = document.querySelectorAll('.grey')
+    for(var i = 0; i < inputs.length; i++){
       if(inputs[i].getAttribute('id') == 'email'){
         placeholder = 'betty.white@goldengirl.com'
       }else if(inputs[i].getAttribute('id') == 'password'){
@@ -69,7 +70,7 @@ var fallback = (function(input){
   }
 
   var placeholder = function(input){
-    set(inputs)
+    set()
     color(input, grey)
     removeReplace(input)
   }
@@ -170,8 +171,8 @@ var validate = (function(){
 // controller ///////////////
 /////////////////////////////
 /////////////////////////////
-
-if(!('placeholder' in document.createElement('input'))){
+console.log('placeholder' in document.createElement('input'))
+if(('placeholder' in document.createElement('input'))){
   var email = document.getElementById('email')
   var password = document.getElementById('password')
   fallback.placeholder(email)
