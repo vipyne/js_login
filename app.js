@@ -30,15 +30,24 @@ var fallback = (function(input){
     input.style.color = color
   }
 
-  var removeReplace = function(input){
+  var set = function(inputs){
     var placeholder
-    if(input.getAttribute('id') == 'email'){
-      placeholder = 'betty.white@goldengirl.com'
-    }else{
-      input.setAttribute('type', 'text')
-      placeholder = 'Password1'
+    for(var i = 0; inputs.length; i++){
+      if(inputs[i].getAttribute('id') == 'email'){
+        placeholder = 'betty.white@goldengirl.com'
+      }else if(inputs[i].getAttribute('id') == 'password'){
+        inputs[i].setAttribute('type', 'text')
+        placeholder = 'Password1'
+      }else{
+      // trying to make this easier to add fields in future,
+      // maybe overdoing it at this point
+        placeholder = 'placeholder'
+      }
+      inputs[i].value = placeholder
     }
-    input.value = placeholder
+  }
+
+  var removeReplace = function(input){
     addEvent('focus', input, function(){
       if(input.value == placeholder){
         if(input.getAttribute('id') == 'password'){
@@ -60,6 +69,7 @@ var fallback = (function(input){
   }
 
   var placeholder = function(input){
+    set(inputs)
     color(input, grey)
     removeReplace(input)
   }
@@ -161,7 +171,7 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
-if(!'placeholder' in document.createElement('input')){
+if(!('placeholder' in document.createElement('input'))){
   var email = document.getElementById('email')
   var password = document.getElementById('password')
   fallback.placeholder(email)
