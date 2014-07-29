@@ -68,6 +68,7 @@ img {
   color: rgb(105, 105, 105);
   max-width: 500px;
   padding: 10px;
+  text-align: left;
 }
 
 #ie-wrapper {
