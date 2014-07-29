@@ -85,13 +85,13 @@ input {
   color: rgb(170,170,170);
 }
 
-input[type="submit"] {
+#submit {
   width: 50px;
   color: rgb(105, 105, 105);
   background-color: rgb(170, 170, 170);
 }
 
-input[type="submit"]:hover {
+#submit:hover {
   color: rgb(170, 170, 170);
   background-color: rgb(105, 105, 105);
 }
