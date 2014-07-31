@@ -68,6 +68,7 @@ img {
   color: rgb(105, 105, 105);
   max-width: 500px;
   padding: 10px;
+  text-align: left;
 }
 
 #ie-wrapper {
@@ -79,19 +80,20 @@ input {
   border: none;
   color: rgb(0,0,0);
   padding-left: 3px;
+  z-index: 100;
 }
 
 :-ms-input-placeholder {
   color: rgb(170,170,170);
 }
 
-input[type="submit"] {
+#submit {
   width: 50px;
   color: rgb(105, 105, 105);
   background-color: rgb(170, 170, 170);
 }
 
-input[type="submit"]:hover {
+#submit:hover {
   color: rgb(170, 170, 170);
   background-color: rgb(105, 105, 105);
 }
@@ -112,6 +114,7 @@ input[type="submit"]:hover {
   background-color: rgb(105, 105, 105);
   margin: 0 5px;
   padding: 0 4px;
+  z-index: 150;
 }
 
 .password:hover:after {
@@ -124,6 +127,7 @@ input[type="submit"]:hover {
   background-color: rgb(105, 105, 105);
   margin: 0 5px;
   padding: 0 4px;
+  z-index: 150;
 }
 
 .title {

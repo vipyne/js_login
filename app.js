@@ -1,14 +1,8 @@
-(function(window, document, undefined){ // trying to stay out of global scope
+// (function(window, document, undefined){
 
 // browser utility //////////
 /////////////////////////////
 /////////////////////////////
-
-// know i should've done this from beginning...
-// all the IEs are snowflakes
-// handles events cross browsers
-// sidenote: not sure if it's ok to have this
-// in this pseudo global scope
 
 var addEvent = function(theEvent, element, func){
   if(element.addEventListener){
@@ -26,48 +20,59 @@ var addEvent = function(theEvent, element, func){
 
 // fallback for HTML5 placeholder for IE8 and probably other browsers
 
-// changed variable name and return function name to be more readable
-// when called (on line 172)
+var fallback = (function(input){
 
-var fallback = (function(){
+  var black = 'rgb(0,0,0)'
 
-  var email = function(){
-    var e = document.forms[0].children[0].children[1]
-    return e.value = 'betty.white@goldengirl.com'
+  var grey = 'rgb(170,170,170)'
+
+  var color = function(input, color){
+    input.style.color = color
   }
 
-  var password = function(){
-    var p = document.forms[0].children[1].children[1]
-    return p.value = 'bestPassword1'
-  }
-
-  var grey = function(){
-    var placeholders = document.querySelectorAll('.grey')
-    for(var i = 0; i < placeholders.length; i++){
-      placeholders[i].style.color = 'rgb(170,170,170)' // ie8 doesn't understand alpha
+  var set = function(){
+    var placeholder
+    var inputs = document.querySelectorAll('.grey')
+    for(var i = 0; i < inputs.length; i++){
+      if(inputs[i].getAttribute('id') == 'email'){
+        placeholder = 'betty.white@goldengirl.com'
+      }else if(inputs[i].getAttribute('id') == 'password'){
+        inputs[i].setAttribute('type', 'text')
+        placeholder = 'Password1'
+      }else{
+      // trying to make this easier to add fields in future,
+      // maybe overdoing it at this point
+        placeholder = 'placeholder'
+      }
+      inputs[i].value = placeholder
     }
   }
 
-  var removeEmail = function(){
-    var e = document.forms[0].children[0].children[1]
-    addEvent('focus', e, function(){
-      e.value = ''
+  var removeReplace = function(input){
+    addEvent('focus', input, function(){
+      if(input.value == placeholder){
+        if(input.getAttribute('id') == 'password'){
+          input.setAttribute('type', 'password')
+        }
+        input.value = ''
+        color(input, black)
+      }
+    }, false)
+    addEvent('blur', input, function(){
+      if(input.value == ''){
+        if(input.getAttribute('id') == 'password'){
+          input.setAttribute('type', 'text')
+        }
+        input.value = placeholder
+        color(input, grey)
+      }
     }, false)
   }
 
-  var removePassword = function(){
-    var p = document.forms[0].children[1].children[1]
-    addEvent('focus', p, function(){
-      p.value = ''
-    }, false)
-  }
-
-  var placeholder = function(){ // public method to call private methods
-    email()
-    password()
-    grey()
-    removeEmail()
-    removePassword()
+  var placeholder = function(input){
+    set()
+    color(input, grey)
+    removeReplace(input)
   }
 
   return {
@@ -167,8 +172,13 @@ var validate = (function(){
 /////////////////////////////
 /////////////////////////////
 
-if(document.attachEvent){
-  fallback.placeholder()
+// this isn't working yet in ie8... but i think this is on
+// the right track
+if(!('placeholder' in document.createElement('input'))){
+  var email = document.getElementById('email')
+  var password = document.getElementById('password')
+  fallback.placeholder(email)
+  fallback.placeholder(password)
 }
 
 addEvent('submit', validate.form, function(event){
@@ -176,4 +186,4 @@ addEvent('submit', validate.form, function(event){
 }, false)
 
 /////////////////////////////
-})(window, document)
+// })(window, document)
