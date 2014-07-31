@@ -1,4 +1,4 @@
-(function(window, document, undefined){
+// (function(window, document, undefined){
 
 // browser utility //////////
 /////////////////////////////
@@ -34,11 +34,14 @@ var fallback = (function(input){
     var placeholder
     var inputs = document.querySelectorAll('.grey')
     for(var i = 0; i < inputs.length; i++){
+      console.log('poop', i)
       if(inputs[i].getAttribute('id') == 'email'){
         placeholder = 'betty.white@goldengirl.com'
+      console.log('poop email', placeholder)
       }else if(inputs[i].getAttribute('id') == 'password'){
         inputs[i].setAttribute('type', 'text')
         placeholder = 'Password1'
+      console.log('poop password', placeholder)
       }else{
       // trying to make this easier to add fields in future,
       // maybe overdoing it at this point
@@ -171,8 +174,10 @@ var validate = (function(){
 // controller ///////////////
 /////////////////////////////
 /////////////////////////////
-console.log('placeholder' in document.createElement('input'))
-if(('placeholder' in document.createElement('input'))){
+
+// this isn't working yet in ie8... but i think this is on
+// the right track
+if(!('placeholder' in document.createElement('input'))){
   var email = document.getElementById('email')
   var password = document.getElementById('password')
   fallback.placeholder(email)
@@ -184,4 +189,4 @@ addEvent('submit', validate.form, function(event){
 }, false)
 
 /////////////////////////////
-})(window, document)
+// })(window, document)
