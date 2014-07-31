@@ -80,6 +80,7 @@ input {
   border: none;
   color: rgb(0,0,0);
   padding-left: 3px;
+  z-index: 100;
 }
 
 :-ms-input-placeholder {
@@ -113,6 +114,7 @@ input {
   background-color: rgb(105, 105, 105);
   margin: 0 5px;
   padding: 0 4px;
+  z-index: 150;
 }
 
 .password:hover:after {
@@ -125,6 +127,7 @@ input {
   background-color: rgb(105, 105, 105);
   margin: 0 5px;
   padding: 0 4px;
+  z-index: 150;
 }
 
 .title {
