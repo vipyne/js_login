@@ -1,4 +1,4 @@
-// (function(window, document, undefined){
+(function(window, document, undefined){
 
 // browser utility //////////
 /////////////////////////////
@@ -10,6 +10,19 @@ var addEvent = function(theEvent, element, func){
   }else if(element.attachEvent){
     element.attachEvent('on' + theEvent, func)
   }
+}
+
+
+
+// round corners ////////////
+/////////////////////////////
+/////////////////////////////
+
+need to move this to a better place
+
+if(document.body.style.borderRadius === undefined){
+  var contentBox = document.getElementById('content')
+  contentBox.style.backgroundImage = 'url(\'img/content-rounded-corners.png\')'
 }
 
 
@@ -40,8 +53,6 @@ var fallback = (function(input){
         inputs[i].setAttribute('type', 'text')
         placeholder = 'Password1'
       }else{
-      // trying to make this easier to add fields in future,
-      // maybe overdoing it at this point
         placeholder = 'placeholder'
       }
       inputs[i].value = placeholder
@@ -147,8 +158,6 @@ var validate = (function(){
     }
   }
 
-  // i like how pretty and short this is, but not sure if its confusing to have
-  // logic where 'null' means 'passed validation'
   var formInput = function(event){
     if(error( message( email() )) || error( message( password() ))){
       if(event.preventDefault){
@@ -182,8 +191,10 @@ if(!('placeholder' in document.createElement('input'))){
 }
 
 addEvent('submit', validate.form, function(event){
+debugger
+
   validate.formInput(event)
 }, false)
 
 /////////////////////////////
-// })(window, document)
+})(window, document)
